@@ -1,0 +1,38 @@
+# Case Study 2: Progressive Electricity Billing
+monthly_units = [85, 120, 190, 310]
+bills = []
+
+for month, units in enumerate(monthly_units, start=1):
+    if units <= 100:
+        energy = units * 2
+    elif units <= 200:
+        energy = 100 * 2 + (units - 100) * 3
+    else:
+        energy = 100 * 2 + 100 * 3 + (units - 200) * 5
+
+    bill = energy + 50 + energy * 0.05
+    if units < 100:
+        bill -= 20
+    bills.append(bill)
+    print(f"Month {month}: {units} units, energy ₹{energy:.2f}, bill ₹{bill:.2f}")
+
+print("\nMONTH-TO-MONTH CHECK")
+for i in range(1, len(bills)):
+    increase = (bills[i] - bills[i - 1]) / bills[i - 1] * 100
+    if increase > 50:
+        print(f"Month {i + 1}: unusual increase of {increase:.1f}%")
+    else:
+        print(f"Month {i + 1}: increase of {increase:.1f}%")
+
+
+#output
+#output
+Month 1: 85 units, energy ₹170.00, bill ₹208.50
+Month 2: 120 units, energy ₹260.00, bill ₹323.00
+Month 3: 190 units, energy ₹470.00, bill ₹543.50
+Month 4: 310 units, energy ₹1050.00, bill ₹1152.50
+
+MONTH-TO-MONTH CHECK
+Month 2: unusual increase of 54.9%
+Month 3: unusual increase of 68.3%
+Month 4: unusual increase of 112.1%
