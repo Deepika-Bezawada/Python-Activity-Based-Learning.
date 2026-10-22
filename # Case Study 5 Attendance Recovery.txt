@@ -1,0 +1,33 @@
+# Case Study 5: Attendance Recovery
+attended = 42
+total_classes = 60
+threshold = 75
+
+if total_classes <= 0 or attended < 0 or attended > total_classes:
+    print("Invalid attendance data")
+else:
+    current = attended / total_classes * 100
+    required = 0
+
+    while (attended + required) / (total_classes + required) * 100 < threshold:
+        required += 1
+        if required > 10000:
+            break
+
+    print(f"Classes attended: {attended}")
+    print(f"Total classes: {total_classes}")
+    print(f"Current attendance: {current:.2f}%")
+    if current >= threshold:
+        print("You already meet the attendance requirement.")
+    else:
+        print(f"Attend the next {required} consecutive classes to reach {threshold}%.")
+        final_percent = (attended + required) / (total_classes + required) * 100
+        print(f"Attendance after recovery: {final_percent:.2f}%")
+
+
+#output
+Classes attended: 42
+Total classes: 60
+Current attendance: 70.00%
+Attend the next 12 consecutive classes to reach 75%.
+Attendance after recovery: 75.00%
