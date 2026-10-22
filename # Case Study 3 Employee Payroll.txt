@@ -1,0 +1,39 @@
+# Case Study 3: Employee Payroll
+name = "Ravi"
+basic = 24000
+overtime_hours = 6
+incentive = 1500
+
+hra = basic * 0.20
+travel_allowance = basic * 0.10
+overtime_pay = overtime_hours * 200
+gross = basic + hra + travel_allowance + overtime_pay + incentive
+
+deduction_first = min(gross, 20000) * 0.05
+deduction_extra = max(gross - 20000, 0) * 0.10
+deduction = deduction_first + deduction_extra
+net_salary = gross - deduction
+
+print("EMPLOYEE SALARY STATEMENT")
+print("Employee:", name)
+print(f"Basic pay: ₹{basic:.2f}")
+print(f"HRA: ₹{hra:.2f}")
+print(f"Travel allowance: ₹{travel_allowance:.2f}")
+print(f"Overtime pay: ₹{overtime_pay:.2f}")
+print(f"Incentive: ₹{incentive:.2f}")
+print(f"Gross salary: ₹{gross:.2f}")
+print(f"Deduction: ₹{deduction:.2f}")
+print(f"Net salary: ₹{net_salary:.2f}")
+
+
+#output
+EMPLOYEE SALARY STATEMENT
+Employee: Ravi
+Basic pay: ₹24000.00
+HRA: ₹4800.00
+Travel allowance: ₹2400.00
+Overtime pay: ₹1200.00
+Incentive: ₹1500.00
+Gross salary: ₹33900.00
+Deduction: ₹2390.00
+Net salary: ₹31510.00
