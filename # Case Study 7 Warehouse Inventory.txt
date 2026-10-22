@@ -1,0 +1,45 @@
+# Case Study 7: Warehouse Inventory Reconciliation
+# Tuple: (product, opening, incoming, dispatched, recorded_closing)
+records = [
+    ("Pens", 50, 30, 45, 35),
+    ("Notebooks", 80, 20, 70, 25),
+    ("Folders", 40, 10, 25, 28),
+]
+target_stock = 20
+
+print("INVENTORY RECONCILIATION")
+for product, opening, incoming, dispatched, closing in records:
+    expected = opening + incoming - dispatched
+    difference = closing - expected
+    reorder = max(target_stock - closing, 0)
+
+    print(f"\nProduct: {product}")
+    print(f"Expected closing stock: {expected}")
+    print(f"Recorded closing stock: {closing}")
+    if difference == 0:
+        print("Status: Matched")
+    else:
+        print(f"Status: DISCREPANCY ({difference:+d} units)")
+    print(f"Replenishment required: {reorder} units")
+
+
+#output
+INVENTORY RECONCILIATION
+
+Product: Pens
+Expected closing stock: 35
+Recorded closing stock: 35
+Status: Matched
+Replenishment required: 0 units
+
+Product: Notebooks
+Expected closing stock: 30
+Recorded closing stock: 25
+Status: DISCREPANCY (-5 units)
+Replenishment required: 0 units
+
+Product: Folders
+Expected closing stock: 25
+Recorded closing stock: 28
+Status: DISCREPANCY (+3 units)
+Replenishment required: 0 units
