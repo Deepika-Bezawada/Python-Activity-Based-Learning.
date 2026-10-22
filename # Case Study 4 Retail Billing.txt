@@ -1,0 +1,39 @@
+# Case Study 4: Retail Billing
+products = [
+    ("Notebook", 80, 5, 0.05),
+    ("School Bag", 900, 2, 0.12),
+    ("Pen Pack", 120, 3, 0.05),
+]
+
+subtotal = 0
+for name, price, quantity, tax_rate in products:
+    subtotal += price * quantity
+
+discount = min(subtotal * 0.10, 300) if subtotal >= 2000 else 0
+discount_ratio = discount / subtotal if subtotal else 0
+total_tax = 0
+
+print("ITEMIZED INVOICE")
+for name, price, quantity, tax_rate in products:
+    line_total = price * quantity
+    line_discount = line_total * discount_ratio
+    taxable_amount = line_total - line_discount
+    tax = taxable_amount * tax_rate
+    total_tax += tax
+    print(f"{name}: {quantity} x ₹{price} = ₹{line_total:.2f}; tax ₹{tax:.2f}")
+
+final_total = subtotal - discount + total_tax
+print(f"Subtotal: ₹{subtotal:.2f}")
+print(f"Discount: ₹{discount:.2f}")
+print(f"Tax: ₹{total_tax:.2f}")
+print(f"FINAL AMOUNT: ₹{final_total:.2f}")
+
+#output
+ITEMIZED INVOICE
+Notebook: 5 x ₹80 = ₹400.00; tax ₹18.00
+School Bag: 2 x ₹900 = ₹1800.00; tax ₹194.40
+Pen Pack: 3 x ₹120 = ₹360.00; tax ₹16.20
+Subtotal: ₹2560.00
+Discount: ₹256.00
+Tax: ₹228.60
+FINAL AMOUNT: ₹2532.60
