@@ -1,0 +1,45 @@
+# Case Study 8: Student Marks Matrix
+students = ["Asha", "Bharat", "Charan", "Divya"]
+subjects = ["Python", "Maths", "English"]
+marks = [
+    [88, 76, 82],
+    [72, 68, 75],
+    [45, 52, 48],
+    [91, 89, 94],
+]
+
+averages = []
+print("STUDENT RESULTS")
+for i in range(len(students)):
+    total = sum(marks[i])
+    average = total / len(subjects)
+    averages.append(average)
+    print(f"{students[i]}: total={total}, average={average:.2f}")
+
+print("\nSUBJECT AVERAGES")
+for j in range(len(subjects)):
+    subject_total = 0
+    for i in range(len(students)):
+        subject_total += marks[i][j]
+    subject_average = subject_total / len(students)
+    print(f"{subjects[j]}: {subject_average:.2f}")
+    if subject_average < 50:
+        print("  Warning: low subject average")
+
+top_index = averages.index(max(averages))
+print(f"\nTop performer: {students[top_index]} ({averages[top_index]:.2f} average)")
+
+
+#output
+STUDENT RESULTS
+Asha: total=246, average=82.00
+Bharat: total=215, average=71.67
+Charan: total=145, average=48.33
+Divya: total=274, average=91.33
+
+SUBJECT AVERAGES
+Python: 74.00
+Maths: 71.25
+English: 74.75
+
+Top performer: Divya (91.33 average)
