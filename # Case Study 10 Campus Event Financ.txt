@@ -1,0 +1,46 @@
+# Case Study 10: Campus Event Financial Planning
+venue = 12000
+equipment = 8000
+transport = 5000
+certificate_per_person = 30
+catering_per_person = 150
+sponsorship = 18000
+registration_fee = 250
+expected_participants = 100
+
+fixed_cost = venue + equipment + transport
+variable_cost = certificate_per_person + catering_per_person
+total_cost = fixed_cost + expected_participants * variable_cost
+funds = sponsorship + expected_participants * registration_fee
+shortfall = max(total_cost - funds, 0)
+
+break_even = 0
+while sponsorship + break_even * registration_fee < fixed_cost + break_even * variable_cost:
+    break_even += 1
+
+print("CAMPUS EVENT BUDGET")
+print(f"Fixed costs: ₹{fixed_cost}")
+print(f"Variable cost per participant: ₹{variable_cost}")
+print(f"Expected participants: {expected_participants}")
+print(f"Total expected cost: ₹{total_cost}")
+print(f"Sponsorship: ₹{sponsorship}")
+print(f"Registration contributions: ₹{expected_participants * registration_fee}")
+print(f"Total funds: ₹{funds}")
+if shortfall:
+    print(f"Funding shortfall: ₹{shortfall}")
+else:
+    print(f"Funding surplus: ₹{funds - total_cost}")
+print(f"Break-even registrations with current sponsorship: {break_even}")
+
+
+#output
+CAMPUS EVENT BUDGET
+Fixed costs: ₹25000
+Variable cost per participant: ₹180
+Expected participants: 100
+Total expected cost: ₹43000
+Sponsorship: ₹18000
+Registration contributions: ₹25000
+Total funds: ₹43000
+Funding surplus: ₹0
+Break-even registrations with current sponsorship: 100
