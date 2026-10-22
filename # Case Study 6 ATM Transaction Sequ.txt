@@ -1,0 +1,52 @@
+# Case Study 6: ATM Transaction Sequence
+transactions = [
+    ("DEPOSIT", 2000),
+    ("WITHDRAW", 1500),
+    ("WITHDRAW", 4000),
+    ("DEPOSIT", 0),
+    ("WITHDRAW", 1000),
+]
+balance = 5000
+total_deposits = 0
+total_withdrawals = 0
+rejected = 0
+withdrawal_limit = 3000
+
+for transaction_type, amount in transactions:
+    if amount <= 0:
+        print(f"Rejected: {transaction_type} ₹{amount} (amount must be positive)")
+        rejected += 1
+    elif transaction_type == "DEPOSIT":
+        balance += amount
+        total_deposits += amount
+        print(f"Accepted deposit: ₹{amount}")
+    elif transaction_type == "WITHDRAW":
+        if amount > withdrawal_limit or amount > balance:
+            print(f"Rejected withdrawal: ₹{amount} (limit or balance exceeded)")
+            rejected += 1
+        else:
+            balance -= amount
+            total_withdrawals += amount
+            print(f"Accepted withdrawal: ₹{amount}")
+    else:
+        print("Rejected: unknown transaction type")
+        rejected += 1
+
+print("\nATM SUMMARY")
+print(f"Deposits: ₹{total_deposits}")
+print(f"Withdrawals: ₹{total_withdrawals}")
+print(f"Rejected transactions: {rejected}")
+print(f"Closing balance: ₹{balance}")
+
+#output
+Accepted deposit: ₹2000
+Accepted withdrawal: ₹1500
+Rejected withdrawal: ₹4000 (limit or balance exceeded)
+Rejected: DEPOSIT ₹0 (amount must be positive)
+Accepted withdrawal: ₹1000
+
+ATM SUMMARY
+Deposits: ₹2000
+Withdrawals: ₹2500
+Rejected transactions: 2
+Closing balance: ₹4500
