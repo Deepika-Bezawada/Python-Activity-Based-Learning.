@@ -1,0 +1,86 @@
+
+# Campus Event Budget Planning System
+
+import math
+
+print(" CAMPUS EVENT BUDGET PLANNER ")
+
+# Event details
+participants = int(input("Enter expected number of participants: "))
+
+# Fixed expenses
+venue = float(input("Enter venue cost: Rs. "))
+equipment = float(input("Enter equipment cost: Rs. "))
+transport = float(input("Enter transport cost: Rs. "))
+
+# Expenses per participant
+catering = float(input("Enter catering cost per person: Rs. "))
+certificate = float(input("Enter certificate cost per person: Rs. "))
+hospitality = float(input("Enter hospitality cost per person: Rs. "))
+
+# Funding details
+contribution = float(input("Student contribution per person: Rs. "))
+sponsorship = float(input("Enter sponsorship amount: Rs. "))
+other_funds = float(input("Enter other contributions: Rs. "))
+
+# Calculate expenses
+fixed_cost = venue + equipment + transport
+
+cost_per_person = catering + certificate + hospitality
+
+total_cost = fixed_cost + (cost_per_person * participants)
+
+# Calculate available funds
+student_funds = contribution * participants
+total_funds = student_funds + sponsorship + other_funds
+
+# Calculate surplus or shortage
+balance = total_funds - total_cost
+
+print(" EVENT BUDGET REPORT ")
+print("Fixed Expenses: Rs.", fixed_cost)
+print("Cost per Person: Rs.", cost_per_person)
+print("Total Event Cost: Rs.", total_cost)
+print("Student Contributions: Rs.", student_funds)
+print("Sponsorships: Rs.", sponsorship)
+print("Other Contributions: Rs.", other_funds)
+print("Total Available Funds: Rs.", total_funds)
+
+if balance >= 0:
+    print("Surplus Amount: Rs.", balance)
+else:
+    print("Additional Funds Needed: Rs.", abs(balance))
+
+# Find minimum participants required
+fixed_funds = sponsorship + other_funds
+remaining_fixed_cost = fixed_cost - fixed_funds
+
+if remaining_fixed_cost <= 0:
+    print("Fixed expenses are covered by other funds.")
+    print("Minimum Participants Needed: 0")
+elif contribution > cost_per_person:
+    minimum = math.ceil(
+        remaining_fixed_cost / (contribution - cost_per_person)
+    )
+    print("Minimum Participants to Break Even:", minimum)
+else:
+    print("Break-even is not possible with the current")
+    print("contribution because per-person costs are too high.")
+
+print(" ")
+
+
+#output
+Enter expected number of participants: 100
+
+Enter venue cost: Rs. 10000
+Enter equipment cost: Rs. 5000
+Enter transport cost: Rs. 3000
+
+Enter catering cost per person: Rs. 150
+Enter certificate cost per person: Rs. 20
+Enter hospitality cost per person: Rs. 30
+
+Student contribution per person: Rs. 250
+Enter sponsorship amount: Rs. 10000
+Enter other contributions: Rs. 2000
