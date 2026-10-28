@@ -1,0 +1,118 @@
+
+# Student Marks Matrix analysis
+students = []
+subjects = ["Mathematics", "Physics", "Programming"]
+
+n = int(input("Enter number of students: "))
+
+for i in range(n):
+    print("\nEnter details for Student", i + 1)
+
+    name = input("Enter student name: ")
+    marks = []
+
+    for subject in subjects:
+        mark = float(input("Enter " + subject + " marks: "))
+        marks.append(mark)
+
+    completed = int(input("Enter topics completed: "))
+    total_topics = int(input("Enter total topics: "))
+
+    average = sum(marks) / len(subjects)
+
+    progress = 0
+    if total_topics > 0:
+        progress = (completed / total_topics) * 100
+
+    students.append({
+        "name": name,
+        "marks": marks,
+        "average": average,
+        "progress": progress
+    })
+
+# Calculate average marks for each subject
+print(" Subject-Wise Analysis")
+
+for j in range(len(subjects)):
+    total = 0
+
+    for student in students:
+        total += student["marks"][j]
+
+    subject_average = total / n
+    print(subjects[j], "Average:", round(subject_average, 2))
+
+    if subject_average < 60:
+        print("Warning: Low performance in", subjects[j])
+
+# Find top-performing student
+top_student = max(students, key=lambda s: s["average"])
+
+print(" Top Performer ")
+print("Student Name:", top_student["name"])
+print("Average Marks:", round(top_student["average"], 2), "%")
+
+# Display each student's results
+print(" Student Performance Report ")
+
+for student in students:
+    print("\nName:", student["name"])
+    print("Average Marks:", round(student["average"], 2), "%")
+    print("Curriculum Progress:",
+          round(student["progress"], 2), "%")
+
+# Calculate overall class average
+class_total = 0
+
+for student in students:
+    class_total += student["average"]
+
+class_average = class_total / n
+
+print("  Overall Statistics ")
+print("Class Average:", round(class_average, 2), "%")
+
+# Identify the lowest-average subject
+subject_averages = []
+
+for j in range(len(subjects)):
+    total = 0
+    for student in students:
+        total += student["marks"][j]
+    subject_averages.append(total / n)
+
+lowest_index = subject_averages.index(min(subject_averages))
+
+print("Lowest Performing Subject:",
+      subjects[lowest_index])
+print("Average Marks:",
+      round(subject_averages[lowest_index], 2))
+
+
+#output
+Enter number of students: 3
+
+Student 1
+Name: Ravi
+Mathematics marks: 85
+Physics marks: 70
+Programming marks: 90
+Topics completed: 8
+Total topics: 10
+
+Student 2
+Name: Priya
+Mathematics marks: 95
+Physics marks: 90
+Programming marks: 92
+Topics completed: 9
+Total topics: 10
+
+Student 3
+Name: Arjun
+Mathematics marks: 50
+Physics marks: 55
+Programming marks: 60
+Topics completed: 6
+Total topics: 10
