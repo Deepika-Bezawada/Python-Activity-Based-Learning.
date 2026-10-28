@@ -1,0 +1,95 @@
+
+# Retail Billing System
+
+total_amount = 0
+total_discount = 0
+max_concession = 500
+
+n = int(input("Enter number of products: "))
+
+print(" RETAIL INVOICE ")
+
+for i in range(n):
+    print("\nProduct", i + 1)
+
+    name = input("Enter product name: ")
+    category = input("Enter category (food/clothing/electronics): ")
+    price = float(input("Enter price per item: Rs. "))
+    quantity = int(input("Enter quantity: "))
+
+    amount = price * quantity
+
+    # Category discount
+    if category.lower() == "food":
+        discount_rate = 5
+    elif category.lower() == "clothing":
+        discount_rate = 10
+    elif category.lower() == "electronics":
+        discount_rate = 8
+    else:
+        discount_rate = 0
+
+    discount = amount * discount_rate / 100
+
+    # Threshold discount
+    if amount >= 5000:
+        discount = discount + amount * 0.05
+
+    # Maximum concession limit
+    if discount > max_concession:
+        discount = max_concession
+
+    final_amount = amount - discount
+
+    total_amount = total_amount + amount
+    total_discount = total_discount + discount
+
+    print("\nProduct:", name)
+    print("Category:", category)
+    print("Quantity:", quantity)
+    print("Original Amount: Rs.", round(amount, 2))
+    print("Discount: Rs.", round(discount, 2))
+    print("Final Amount: Rs.", round(final_amount, 2))
+
+# Final invoice
+print(" FINAL INVOICE ")
+print("Total Amount: Rs.", round(total_amount, 2))
+print("Total Discount: Rs.", round(total_discount, 2))
+print("Grand Total: Rs.", round(total_amount - total_discount, 2))
+print("")
+
+#output
+
+Enter number of products: 2
+ RETAIL INVOICE 
+
+Product 1
+Enter product name: shirt
+Enter category (food/clothing/electronics): clothing
+Enter price per item: Rs. 1000
+Enter quantity: 2
+
+Product: shirt
+Category: clothing
+Quantity: 2
+Original Amount: Rs. 2000.0
+Discount: Rs. 200.0
+Final Amount: Rs. 1800.0
+
+Product 2
+Enter product name: Headphones
+Enter category (food/clothing/electronics): electronics
+Enter price per item: Rs. 6000
+Enter quantity: 1
+
+Product: Headphones
+Category: electronics
+Quantity: 1
+Original Amount: Rs. 6000.0
+Discount: Rs. 500
+Final Amount: Rs. 5500.0
+ FINAL INVOICE 
+Total Amount: Rs. 8000.0
+Total Discount: Rs. 700.0
+Grand Total: Rs. 7300.0
+
