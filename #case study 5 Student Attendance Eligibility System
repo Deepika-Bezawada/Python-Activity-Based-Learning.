@@ -1,0 +1,82 @@
+
+# Student Attendance Eligibility System
+
+name = input("Enter student name: ")
+total_classes = int(input("Enter total classes conducted: "))
+attended = int(input("Enter classes attended: "))
+threshold = float(input("Enter required attendance percentage: "))
+
+if total_classes <= 0 or attended < 0 or attended > total_classes:
+    print("Invalid attendance details!")
+
+else:
+    current = (attended / total_classes) * 100
+
+    print(" Attendance Report ")
+    print("Student Name:", name)
+    print("Classes Conducted:", total_classes)
+    print("Classes Attended:", attended)
+    print("Current Attendance:", round(current, 2), "%")
+
+    if current >= threshold:
+        print("Status: Eligible")
+    else:
+        print("Status: Not Eligible")
+
+    # Minimum consecutive classes to attend
+    if current < threshold:
+        needed = 0
+        while ((attended + needed) /
+               (total_classes + needed)) * 100 < threshold:
+            needed += 1
+
+        print("Classes to attend continuously:", needed)
+    else:
+        print("Minimum additional classes needed: 0")
+
+    # Future attendance scenarios
+    print(" Future Attendance Scenarios ")
+
+    future_classes = [5, 10, 20]
+
+    for future in future_classes:
+        future_attended = int(input(
+            "How many of the next " + str(future) +
+            " classes will you attend? "
+        ))
+
+        if future_attended < 0 or future_attended > future:
+            print("Invalid number of attended classes.")
+        else:
+            percentage = (
+                (attended + future_attended) /
+                (total_classes + future)
+            ) * 100
+
+            print("After", future, "classes:",
+                  round(percentage, 2), "%")
+
+            if percentage >= threshold:
+                print("Eligibility: Eligible")
+            else:
+                print("Eligibility: Not Eligible")
+
+#output
+Enter student name: rani
+Enter total classes conducted: 80
+Enter classes attended: 60
+Enter required attendance percentage: 75
+ Attendance Report
+Student Name: rani
+Classes Conducted: 80
+Classes Attended: 60
+Current Attendance: 75.0 %
+Status: Eligible
+Minimum additional classes needed: 0
+ Future Attendance Scenarios
+How many of the next 5 classes will you attend? 4
+After 5 classes: 75.29 %
+Eligibility: Eligible
+How many of the next 10 classes will you attend? 10
+After 10 classes: 77.78 %
+Eligibility: Eligible
